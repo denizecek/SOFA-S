@@ -1,0 +1,13 @@
+#!/bin/bash --login
+#SBATCH -J sofa        # Job name
+#SBATCH -p himem                       # Partition name
+#SBATCH -t 2-0                         # Wallclock time limit
+#SBATCH -o %x.o%A.%a                   # Output file
+#SBATCH -e %x.e%A.%a 
+##SBATCH --mem=256G  
+#SBATCH -n 16                   
+
+module purge
+module load apps/gcc/R/4.3.1 
+
+R CMD BATCH --no-restore --no-save /mnt/iusers01/dw01/p09731dk/scratch/sofa/Sofa_Demo_v2.R Sofa_Demo_v2.R.$SLURM_JOB_ID
